@@ -7,7 +7,7 @@ const packages = require('./packages');
 
 const rootPkgJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 
-packages.forEach(function(pkgName) {
+packages.forEach((pkgName) => {
   let basePkgJson;
   if (fs.existsSync(`./packages/${pkgName}/package.tpl.json`)) {
     basePkgJson = JSON.parse(fs.readFileSync(`./packages/${pkgName}/package.tpl.json`, 'utf8'));
@@ -16,7 +16,12 @@ packages.forEach(function(pkgName) {
   }
 
   // define the package name
-  basePkgJson.name = `@agm/${pkgName}`
+  basePkgJson.name = `@agm/${pkgName}`;
+
+  // set the entry points
+  basePkgJson.main = `${pkgName}.umd.js`;
+  basePkgJson.module = `${pkgName}.fesm.js`;
+  basePkgJson.typings = `${pkgName}.d.ts`;
 
   // update version
   basePkgJson.version = rootPkgJson.version;
@@ -29,7 +34,7 @@ packages.forEach(function(pkgName) {
 
   // remove the private option
   delete basePkgJson.private;
-  
+
   // remove dependencies for safety reasons as we use peerDependencies
   basePkgJson.dependencies = {};
 

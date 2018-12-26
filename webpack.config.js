@@ -4,8 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 
 // Webpack Plugins
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /**
  * Env
